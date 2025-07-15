@@ -1,0 +1,6 @@
+@SearchAutocomplete_HostAddress = http://localhost:5038
+
+GET {{SearchAutocomplete_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

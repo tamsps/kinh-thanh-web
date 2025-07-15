@@ -1,0 +1,25 @@
+{
+  "name": "search-autocomplete-js-tests",
+  "version": "1.0.0",
+  "description": "JavaScript tests for Search Autocomplete functionality",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/dom": "^9.3.3"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": ["<rootDir>/setup-tests.js"],
+    "testMatch": ["**/__tests__/**/*.js", "**/?(*.)+(spec|test).js"],
+    "collectCoverageFrom": [
+      "../../SearchAutocomplete/wwwroot/js/**/*.js",
+      "!**/node_modules/**"
+    ]
+  }
+}
