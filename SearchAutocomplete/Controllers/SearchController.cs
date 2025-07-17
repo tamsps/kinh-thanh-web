@@ -54,9 +54,9 @@ public class SearchController : ControllerBase
 
     [HttpGet("count")]
     public async Task<ActionResult<int>> GetSearchCount([FromQuery] string searchTerm, 
-        [FromQuery] List<string>? types = null,
-        [FromQuery] List<string>? authors = null,
-        [FromQuery] List<int>? sectionIds = null)
+        [FromQuery] List<string>? bookNames = null,
+        [FromQuery] List<string>? bookTypes = null,
+        [FromQuery] List<int>? chapterNumbers = null)
     {
         try
         {
@@ -70,9 +70,9 @@ public class SearchController : ControllerBase
                 SearchTerm = searchTerm,
                 Filters = new SearchFilters
                 {
-                    Types = types ?? new List<string>(),
-                    Authors = authors ?? new List<string>(),
-                    SectionIds = sectionIds ?? new List<int>()
+                    BookNames = bookNames ?? new List<string>(),
+                    BookTypes = bookTypes ?? new List<string>(),
+                    ChapterNumbers = chapterNumbers ?? new List<int>()
                 }
             };
 
@@ -86,34 +86,36 @@ public class SearchController : ControllerBase
         }
     }
 
-    [HttpGet("filters/types")]
-    public async Task<ActionResult<IEnumerable<string>>> GetAvailableTypes()
+
+
+    [HttpGet("filters/book-names")]
+    public async Task<ActionResult<IEnumerable<string>>> GetAvailableBookNames()
     {
         try
         {
-            _logger.LogInformation("Getting available types from database");
-            var types = await _kinhThanhRepository.GetDistinctTypesAsync();
-            return Ok(types);
+            _logger.LogInformation("Getting available book names from database");
+            var bookNames = await _kinhThanhRepository.GetDistinctBookNamesAsync();
+            return Ok(bookNames);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while getting available types");
+            _logger.LogError(ex, "Error occurred while getting available book names");
             return StatusCode(500, new { message = "An error occurred while getting filter options" });
         }
     }
 
-    [HttpGet("filters/authors")]
-    public async Task<ActionResult<IEnumerable<string>>> GetAvailableAuthors()
+    [HttpGet("filters/book-types")]
+    public async Task<ActionResult<IEnumerable<string>>> GetAvailableBookTypes()
     {
         try
         {
-            _logger.LogInformation("Getting available authors from database");
-            var authors = await _kinhThanhRepository.GetDistinctAuthorsAsync();
-            return Ok(authors);
+            _logger.LogInformation("Getting available book types from database");
+            var bookTypes = await _kinhThanhRepository.GetDistinctBookTypesAsync();
+            return Ok(bookTypes);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while getting available authors");
+            _logger.LogError(ex, "Error occurred while getting available book types");
             return StatusCode(500, new { message = "An error occurred while getting filter options" });
         }
     }

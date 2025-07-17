@@ -8,6 +8,6 @@ public interface IKinhThanhRepository
     Task<IEnumerable<KinhThanh>> SearchAsync(string searchTerm, SearchFilters filters, int page, int pageSize);
     Task<IEnumerable<string>> GetAutocompleteSuggestionsAsync(string searchTerm, SearchFilters filters, int maxResults);
     Task<int> GetSearchCountAsync(string searchTerm, SearchFilters filters);
-    Task<IEnumerable<string>> GetDistinctTypesAsync();
-    Task<IEnumerable<string>> GetDistinctAuthorsAsync();
+    Task<IEnumerable<string>> GetDistinctBookNamesAsync();
+    Task<IEnumerable<string>> GetDistinctBookTypesAsync();
 }

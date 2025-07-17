@@ -116,10 +116,11 @@ class SearchHandler {
                     ${this.escapeHtml(item.content)}
                 </div>
                 <div class="search-result-meta">
-                    <span class="badge bg-secondary">${this.escapeHtml(item.sectionName)}</span>
-                    ${item.type ? `<span class="badge bg-info">${this.escapeHtml(item.type)}</span>` : ''}
-                    ${item.author ? `<span class="badge bg-success">${this.escapeHtml(item.author)}</span>` : ''}
-                    ${item.from && item.to ? `<small class="text-muted">${this.escapeHtml(item.from)} - ${this.escapeHtml(item.to)}</small>` : ''}
+                    ${item.bookName ? `<span class="badge bg-primary">${this.escapeHtml(item.bookName)}</span>` : ''}
+                    ${item.bookType ? `<span class="badge bg-secondary">${item.bookType === 'C' ? 'Cựu Ước' : item.bookType === 'T' ? 'Tân Ước' : this.escapeHtml(item.bookType)}</span>` : ''}
+                    ${item.chapterNumber ? `<span class="badge bg-info">Chương ${item.chapterNumber}</span>` : ''}
+                    ${item.statementNumber ? `<span class="badge bg-success">Câu ${item.statementNumber}</span>` : ''}
+                    ${item.sectionName ? `<small class="text-muted">${this.escapeHtml(item.sectionName)}</small>` : ''}
                 </div>
             </div>
         `;

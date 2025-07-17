@@ -10,4 +10,8 @@ public class KinhThanhDto
     public string To { get; set; } = string.Empty;
     public string Type { get; set; } = string.Empty;
     public string Author { get; set; } = string.Empty;
+    public string BookName { get; set; } = string.Empty;
+    public string BookType { get; set; } = string.Empty;
+    public int ChapterNumber { get; set; }
+    public int StatementNumber { get; set; }
 }

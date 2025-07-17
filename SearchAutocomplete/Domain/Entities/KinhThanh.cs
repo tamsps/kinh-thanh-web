@@ -24,6 +24,17 @@ public class KinhThanh
     [MaxLength(255)]
     public string Author { get; set; } = string.Empty;
     
+    // New fields for JSON data structure
+    [MaxLength(255)]
+    public string BookName { get; set; } = string.Empty;
+    
+    [MaxLength(100)]
+    public string BookType { get; set; } = string.Empty;
+    
+    public int ChapterNumber { get; set; }
+    
+    public int StatementNumber { get; set; }
+    
     // Navigation property
     public Section Section { get; set; } = null!;
 }

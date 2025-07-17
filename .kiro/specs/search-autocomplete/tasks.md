@@ -162,3 +162,13 @@
   - Implement data migration scripts if needed
   - Ensure proper database initialization in Program.cs
   - _Requirements: 4.3_
+
+- [x] 13. Migrate to JSON data source with new filtering structure
+
+
+  - Update data model to support book_name, book_type, and chapter number fields
+  - Modify DatabaseSeeder to read from kinh_thanh_full.json instead of hardcoded data
+  - Update filtering logic to work with book_name and book_type instead of current fields
+  - Adapt search functionality to work with chapter-based structure
+  - Update filter endpoints to return book_name and book_type options
+  - _Requirements: 3.1, 3.2, 4.3_

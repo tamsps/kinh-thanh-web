@@ -20,9 +20,9 @@ public class AutocompleteController : ControllerBase
     [HttpGet("suggestions")]
     public async Task<ActionResult<IEnumerable<string>>> GetSuggestions(
         [FromQuery] string searchTerm,
-        [FromQuery] List<string>? types = null,
-        [FromQuery] List<string>? authors = null,
-        [FromQuery] List<int>? sectionIds = null,
+        [FromQuery] List<string>? bookNames = null,
+        [FromQuery] List<string>? bookTypes = null,
+        [FromQuery] List<int>? chapterNumbers = null,
         [FromQuery] int maxResults = 10)
     {
         try
@@ -42,9 +42,9 @@ public class AutocompleteController : ControllerBase
                 SearchTerm = searchTerm,
                 Filters = new SearchFilters
                 {
-                    Types = types ?? new List<string>(),
-                    Authors = authors ?? new List<string>(),
-                    SectionIds = sectionIds ?? new List<int>()
+                    BookNames = bookNames ?? new List<string>(),
+                    BookTypes = bookTypes ?? new List<string>(),
+                    ChapterNumbers = chapterNumbers ?? new List<int>()
                 },
                 MaxResults = Math.Min(maxResults, 10) // Ensure maximum 10 results
             };

@@ -24,12 +24,10 @@ public class KinhThanhRepository : IKinhThanhRepository
         {
             var query = _context.KinhThanhs.Include(k => k.Section).AsQueryable();
 
-            // Apply search term filter
+            // Apply search term filter - only search in content
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
-                query = query.Where(k => k.Content.Contains(searchTerm) ||
-                                       k.From.Contains(searchTerm) ||
-                                       k.To.Contains(searchTerm));
+                query = query.Where(k => k.Content.Contains(searchTerm));
             }
 
             // Apply filters
@@ -74,12 +72,10 @@ public class KinhThanhRepository : IKinhThanhRepository
         {
             var query = _context.KinhThanhs.AsQueryable();
 
-            // Apply search term filter
+            // Apply search term filter - only search in content
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
-                query = query.Where(k => k.Content.Contains(searchTerm) ||
-                                       k.From.Contains(searchTerm) ||
-                                       k.To.Contains(searchTerm));
+                query = query.Where(k => k.Content.Contains(searchTerm));
             }
 
             // Apply filters
@@ -89,47 +85,49 @@ public class KinhThanhRepository : IKinhThanhRepository
         }, $"GetSearchCountAsync(term: {searchTerm})");
     }
 
-    public async Task<IEnumerable<string>> GetDistinctTypesAsync()
+
+
+    public async Task<IEnumerable<string>> GetDistinctBookNamesAsync()
     {
         return await _resilienceService.ExecuteDatabaseOperationAsync(async () =>
         {
             return await _context.KinhThanhs
-                .Where(k => !string.IsNullOrEmpty(k.Type))
-                .Select(k => k.Type)
+                .Where(k => !string.IsNullOrEmpty(k.BookName))
+                .Select(k => k.BookName)
+                .Distinct()
+                .OrderBy(b => b)
+                .ToListAsync();
+        }, "GetDistinctBookNamesAsync");
+    }
+
+    public async Task<IEnumerable<string>> GetDistinctBookTypesAsync()
+    {
+        return await _resilienceService.ExecuteDatabaseOperationAsync(async () =>
+        {
+            return await _context.KinhThanhs
+                .Where(k => !string.IsNullOrEmpty(k.BookType))
+                .Select(k => k.BookType)
                 .Distinct()
                 .OrderBy(t => t)
                 .ToListAsync();
-        }, "GetDistinctTypesAsync");
-    }
-
-    public async Task<IEnumerable<string>> GetDistinctAuthorsAsync()
-    {
-        return await _resilienceService.ExecuteDatabaseOperationAsync(async () =>
-        {
-            return await _context.KinhThanhs
-                .Where(k => !string.IsNullOrEmpty(k.Author))
-                .Select(k => k.Author)
-                .Distinct()
-                .OrderBy(a => a)
-                .ToListAsync();
-        }, "GetDistinctAuthorsAsync");
+        }, "GetDistinctBookTypesAsync");
     }
 
     private IQueryable<KinhThanh> ApplyFilters(IQueryable<KinhThanh> query, SearchFilters filters)
     {
-        if (filters.Types.Any())
+        if (filters.BookNames.Any())
         {
-            query = query.Where(k => filters.Types.Contains(k.Type));
+            query = query.Where(k => filters.BookNames.Contains(k.BookName));
         }
 
-        if (filters.Authors.Any())
+        if (filters.BookTypes.Any())
         {
-            query = query.Where(k => filters.Authors.Contains(k.Author));
+            query = query.Where(k => filters.BookTypes.Contains(k.BookType));
         }
 
-        if (filters.SectionIds.Any())
+        if (filters.ChapterNumbers.Any())
         {
-            query = query.Where(k => filters.SectionIds.Contains(k.SectionId));
+            query = query.Where(k => filters.ChapterNumbers.Contains(k.ChapterNumber));
         }
 
         return query;

@@ -44,7 +44,11 @@ public class SearchService : ISearchService
                 From = k.From,
                 To = k.To,
                 Type = k.Type,
-                Author = k.Author
+                Author = k.Author,
+                BookName = k.BookName,
+                BookType = k.BookType,
+                ChapterNumber = k.ChapterNumber,
+                StatementNumber = k.StatementNumber
             });
 
             var searchResult = new SearchResultDto
@@ -62,7 +66,7 @@ public class SearchService : ISearchService
             {
                 ["Page"] = request.Page,
                 ["PageSize"] = request.PageSize,
-                ["FilterCount"] = request.Filters.Types.Count + request.Filters.Authors.Count + request.Filters.SectionIds.Count
+                ["FilterCount"] = request.Filters.BookNames.Count + request.Filters.BookTypes.Count + request.Filters.ChapterNumbers.Count
             };
             
             _performanceLogger.LogSearchMetrics(request.SearchTerm, totalCount, stopwatch.ElapsedMilliseconds, context);
@@ -78,7 +82,7 @@ public class SearchService : ISearchService
             {
                 ["Page"] = request.Page,
                 ["PageSize"] = request.PageSize,
-                ["FilterCount"] = request.Filters.Types.Count + request.Filters.Authors.Count + request.Filters.SectionIds.Count
+                ["FilterCount"] = request.Filters.BookNames.Count + request.Filters.BookTypes.Count + request.Filters.ChapterNumbers.Count
             };
             
             _performanceLogger.LogSearchMetrics(request.SearchTerm, 0, stopwatch.ElapsedMilliseconds, context);

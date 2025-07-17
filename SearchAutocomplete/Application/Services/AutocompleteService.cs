@@ -40,7 +40,7 @@ public class AutocompleteService : IAutocompleteService
             var context = new Dictionary<string, object>
             {
                 ["MaxResults"] = maxResults,
-                ["FilterCount"] = request.Filters.Types.Count + request.Filters.Authors.Count + request.Filters.SectionIds.Count
+                ["FilterCount"] = request.Filters.BookNames.Count + request.Filters.BookTypes.Count + request.Filters.ChapterNumbers.Count
             };
             
             _performanceLogger.LogAutocompleteMetrics(request.SearchTerm, suggestions.Count(), stopwatch.ElapsedMilliseconds, context);
@@ -55,7 +55,7 @@ public class AutocompleteService : IAutocompleteService
             var context = new Dictionary<string, object>
             {
                 ["MaxResults"] = Math.Min(request.MaxResults, 10),
-                ["FilterCount"] = request.Filters.Types.Count + request.Filters.Authors.Count + request.Filters.SectionIds.Count
+                ["FilterCount"] = request.Filters.BookNames.Count + request.Filters.BookTypes.Count + request.Filters.ChapterNumbers.Count
             };
             
             _performanceLogger.LogAutocompleteMetrics(request.SearchTerm, 0, stopwatch.ElapsedMilliseconds, context);

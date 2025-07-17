@@ -105,14 +105,14 @@ class AutocompleteHandler {
             });
             
             // Add filters to params
-            if (filters.types && filters.types.length > 0) {
-                filters.types.forEach(type => params.append('types', type));
+            if (filters.bookNames && filters.bookNames.length > 0) {
+                filters.bookNames.forEach(bookName => params.append('bookNames', bookName));
             }
-            if (filters.authors && filters.authors.length > 0) {
-                filters.authors.forEach(author => params.append('authors', author));
+            if (filters.bookTypes && filters.bookTypes.length > 0) {
+                filters.bookTypes.forEach(bookType => params.append('bookTypes', bookType));
             }
-            if (filters.sectionIds && filters.sectionIds.length > 0) {
-                filters.sectionIds.forEach(id => params.append('sectionIds', id));
+            if (filters.chapterNumbers && filters.chapterNumbers.length > 0) {
+                filters.chapterNumbers.forEach(chapter => params.append('chapterNumbers', chapter));
             }
             
             // Create AbortController for request cancellation

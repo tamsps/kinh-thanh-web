@@ -1,9 +1,9 @@
 class FilterManager {
     constructor() {
         this.activeFilters = {
-            types: [],
-            authors: [],
-            sectionIds: []
+            bookNames: [],
+            bookTypes: [],
+            chapterNumbers: []
         };
         
         this.init();
@@ -32,35 +32,34 @@ class FilterManager {
     
     async loadDynamicFilters() {
         try {
-            // Load unique types and authors from the API
-            await this.loadTypeFilters();
-            await this.loadAuthorFilters();
+            // Load book names and chapter numbers from the API
+            await this.loadBookNameFilters();
+            await this.loadChapterFilters();
         } catch (error) {
             console.error('Error loading dynamic filters:', error);
         }
     }
     
-    async loadTypeFilters() {
+    async loadBookNameFilters() {
         try {
-            const response = await fetch('/api/search/filters/types');
+            const response = await fetch('/api/search/filters/book-names');
             if (response.ok) {
-                const types = await response.json();
-                this.renderFilterGroup('typeFilters', types, 'type', 'Type');
+                const bookNames = await response.json();
+                this.renderFilterGroup('bookNameFilters', bookNames, 'bookName', 'Book Name');
             }
         } catch (error) {
-            console.error('Error loading type filters:', error);
+            console.error('Error loading book name filters:', error);
         }
     }
     
-    async loadAuthorFilters() {
+    async loadChapterFilters() {
         try {
-            const response = await fetch('/api/search/filters/authors');
-            if (response.ok) {
-                const authors = await response.json();
-                this.renderFilterGroup('authorFilters', authors, 'author', 'Author');
-            }
+            // For now, we'll generate chapter numbers 1-50 as common chapters
+            // In a real implementation, this could be dynamic based on selected books
+            const chapters = Array.from({length: 50}, (_, i) => i + 1);
+            this.renderFilterGroup('chapterFilters', chapters, 'chapter', 'Chapter');
         } catch (error) {
-            console.error('Error loading author filters:', error);
+            console.error('Error loading chapter filters:', error);
         }
     }
     
@@ -105,20 +104,20 @@ class FilterManager {
     
     addFilter(type, value) {
         switch (type) {
-            case 'type':
-                if (!this.activeFilters.types.includes(value)) {
-                    this.activeFilters.types.push(value);
+            case 'bookName':
+                if (!this.activeFilters.bookNames.includes(value)) {
+                    this.activeFilters.bookNames.push(value);
                 }
                 break;
-            case 'author':
-                if (!this.activeFilters.authors.includes(value)) {
-                    this.activeFilters.authors.push(value);
+            case 'bookType':
+                if (!this.activeFilters.bookTypes.includes(value)) {
+                    this.activeFilters.bookTypes.push(value);
                 }
                 break;
-            case 'section':
-                const sectionId = parseInt(value);
-                if (!this.activeFilters.sectionIds.includes(sectionId)) {
-                    this.activeFilters.sectionIds.push(sectionId);
+            case 'chapter':
+                const chapterNum = parseInt(value);
+                if (!this.activeFilters.chapterNumbers.includes(chapterNum)) {
+                    this.activeFilters.chapterNumbers.push(chapterNum);
                 }
                 break;
         }
@@ -126,15 +125,15 @@ class FilterManager {
     
     removeFilter(type, value) {
         switch (type) {
-            case 'type':
-                this.activeFilters.types = this.activeFilters.types.filter(t => t !== value);
+            case 'bookName':
+                this.activeFilters.bookNames = this.activeFilters.bookNames.filter(b => b !== value);
                 break;
-            case 'author':
-                this.activeFilters.authors = this.activeFilters.authors.filter(a => a !== value);
+            case 'bookType':
+                this.activeFilters.bookTypes = this.activeFilters.bookTypes.filter(t => t !== value);
                 break;
-            case 'section':
-                const sectionId = parseInt(value);
-                this.activeFilters.sectionIds = this.activeFilters.sectionIds.filter(id => id !== sectionId);
+            case 'chapter':
+                const chapterNum = parseInt(value);
+                this.activeFilters.chapterNumbers = this.activeFilters.chapterNumbers.filter(c => c !== chapterNum);
                 break;
         }
     }
@@ -145,23 +144,20 @@ class FilterManager {
         
         const filterTags = [];
         
-        // Add type filters
-        this.activeFilters.types.forEach(type => {
-            filterTags.push(this.createFilterTag('Type', type, 'type'));
+        // Add book name filters
+        this.activeFilters.bookNames.forEach(bookName => {
+            filterTags.push(this.createFilterTag('Book Name', bookName, 'bookName'));
         });
         
-        // Add author filters
-        this.activeFilters.authors.forEach(author => {
-            filterTags.push(this.createFilterTag('Author', author, 'author'));
+        // Add book type filters
+        this.activeFilters.bookTypes.forEach(bookType => {
+            const displayName = bookType === 'C' ? 'Cựu Ước (C)' : bookType === 'T' ? 'Tân Ước (T)' : bookType;
+            filterTags.push(this.createFilterTag('Book Type', displayName, 'bookType', bookType));
         });
         
-        // Add section filters
-        this.activeFilters.sectionIds.forEach(sectionId => {
-            const sectionCheckbox = document.querySelector(`input[data-filter-type="section"][value="${sectionId}"]`);
-            if (sectionCheckbox) {
-                const sectionLabel = sectionCheckbox.nextElementSibling.textContent.trim();
-                filterTags.push(this.createFilterTag('Section', sectionLabel, 'section', sectionId));
-            }
+        // Add chapter filters
+        this.activeFilters.chapterNumbers.forEach(chapterNum => {
+            filterTags.push(this.createFilterTag('Chapter', chapterNum, 'chapter'));
         });
         
         if (filterTags.length === 0) {
@@ -214,9 +210,9 @@ class FilterManager {
         
         // Clear active filters
         this.activeFilters = {
-            types: [],
-            authors: [],
-            sectionIds: []
+            bookNames: [],
+            bookTypes: [],
+            chapterNumbers: []
         };
         
         this.updateActiveFiltersDisplay();
@@ -244,9 +240,9 @@ class FilterManager {
     }
     
     hasActiveFilters() {
-        return this.activeFilters.types.length > 0 || 
-               this.activeFilters.authors.length > 0 || 
-               this.activeFilters.sectionIds.length > 0;
+        return this.activeFilters.bookNames.length > 0 || 
+               this.activeFilters.bookTypes.length > 0 || 
+               this.activeFilters.chapterNumbers.length > 0;
     }
     
     escapeHtml(text) {

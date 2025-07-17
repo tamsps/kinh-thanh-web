@@ -1,0 +1,103 @@
+{
+  "books": [
+    {
+      "book_name": "SÁCH SÁNG THẾ",
+      "book_type": "Cựu Ước",
+      "chapters": [
+        {
+          "number": 1,
+          "statements": [
+            {
+              "number": 1,
+              "content": "Lúc khởi đầu, Thiên Chúa sáng tạo trời đất."
+            },
+            {
+              "number": 2,
+              "content": "Đất còn trống rỗng, chưa có hình dạng, bóng tối bao trùm vực thẳm, và thần khí Thiên Chúa bay lượn trên mặt nước."
+            },
+            {
+              "number": 3,
+              "content": "Thiên Chúa phán: \"Phải có ánh sáng.\" Liền có ánh sáng."
+            },
+            {
+              "number": 4,
+              "content": "Thiên Chúa thấy rằng ánh sáng tốt đẹp. Thiên Chúa phân rẽ ánh sáng và bóng tối."
+            },
+            {
+              "number": 5,
+              "content": "Thiên Chúa gọi ánh sáng là \"ngày\", bóng tối là \"đêm\". Qua một buổi chiều và một buổi sáng: đó là ngày thứ nhất."
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "statements": [
+            {
+              "number": 1,
+              "content": "Như vậy, trời đất và muôn vật trong đó đã hoàn thành."
+            },
+            {
+              "number": 2,
+              "content": "Ngày thứ bảy, Thiên Chúa hoàn tất công việc Người đã làm. Ngày thứ bảy, Người nghỉ, không làm việc gì nữa."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "book_name": "KINH PHÁP CÚ",
+      "book_type": "Phật Giáo",
+      "chapters": [
+        {
+          "number": 1,
+          "statements": [
+            {
+              "number": 1,
+              "content": "Tâm là chủ tạo ra tất cả, tâm đi trước, tâm làm chủ. Nếu với tâm thanh tịnh mà nói năng, hành động, thì an lạc sẽ theo sau, như bóng theo hình."
+            },
+            {
+              "number": 2,
+              "content": "Hận thù không thể diệt trừ hận thù. Chỉ có từ ái mới diệt trừ được hận thù. Đây là chân lý bất biến."
+            },
+            {
+              "number": 3,
+              "content": "Người nào không tham lam, không sân hận, không si mê, thì người ấy được gọi là bậc A-la-hán."
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "statements": [
+            {
+              "number": 1,
+              "content": "Như người thợ làm mũi tên làm thẳng cây tên, người trí cũng vậy, điều phục tâm mình."
+            },
+            {
+              "number": 2,
+              "content": "Tất cả chúng sinh đều sợ chết, đều yêu sống. Hãy lấy mình làm thước đo, không nên giết hại hay bảo người khác giết hại."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "book_name": "KINH KIM CƯƠNG",
+      "book_type": "Phật Giáo",
+      "chapters": [
+        {
+          "number": 1,
+          "statements": [
+            {
+              "number": 1,
+              "content": "Tất cả pháp hữu vi như mộng huyễn, như bọt nước, như bóng, như sương mai, như chớp. Nên quán như vậy."
+            },
+            {
+              "number": 2,
+              "content": "Phàm có tướng đều là hư vọng. Nếu thấy các tướng không phải tướng, tức thấy Như Lai."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

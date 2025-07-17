@@ -52,33 +52,36 @@
                                 <div class="collapse" id="filtersCollapse">
                                     <div class="card-body">
                                         <div class="row">
-                                            <!-- Type Filters -->
+                                            <!-- Book Name Filters -->
                                             <div class="col-md-4">
-                                                <h6>Type</h6>
-                                                <div id="typeFilters" class="filter-group">
-                                                    <!-- Dynamic type filters will be loaded here -->
+                                                <h6>Book Names</h6>
+                                                <div id="bookNameFilters" class="filter-group">
+                                                    <!-- Dynamic book name filters will be loaded here -->
                                                 </div>
                                             </div>
-                                            <!-- Author Filters -->
+                                            <!-- Book Type Filters -->
                                             <div class="col-md-4">
-                                                <h6>Author</h6>
-                                                <div id="authorFilters" class="filter-group">
-                                                    <!-- Dynamic author filters will be loaded here -->
+                                                <h6>Book Types</h6>
+                                                <div id="bookTypeFilters" class="filter-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input filter-checkbox" type="checkbox" value="C" id="bookType_C" data-filter-type="bookType">
+                                                        <label class="form-check-label" for="bookType_C">
+                                                            Cựu Ước (C)
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input filter-checkbox" type="checkbox" value="T" id="bookType_T" data-filter-type="bookType">
+                                                        <label class="form-check-label" for="bookType_T">
+                                                            Tân Ước (T)
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <!-- Section Filters -->
+                                            <!-- Chapter Number Filters -->
                                             <div class="col-md-4">
-                                                <h6>Section</h6>
-                                                <div id="sectionFilters" class="filter-group">
-                                                    @foreach (var sectionItem in Model)
-                                                    {
-                                                        <div class="form-check">
-                                                            <input class="form-check-input filter-checkbox" type="checkbox" value="@sectionItem.Id" id="section_@sectionItem.Id" data-filter-type="section">
-                                                            <label class="form-check-label" for="section_@sectionItem.Id">
-                                                                @sectionItem.Name
-                                                            </label>
-                                                        </div>
-                                                    }
+                                                <h6>Chapter Numbers</h6>
+                                                <div id="chapterFilters" class="filter-group">
+                                                    <!-- Dynamic chapter filters will be loaded here -->
                                                 </div>
                                             </div>
                                         </div>
